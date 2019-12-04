@@ -1,6 +1,6 @@
 {
   "name": "use-three",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "React Hook for Three.js",
   "main": "lib/index.js",
   "source": "src/index.ts",
