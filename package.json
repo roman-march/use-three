@@ -1,0 +1,54 @@
+{
+  "name": "use-three",
+  "version": "1.0.2",
+  "description": "React Hook for ThreeJs",
+  "main": "lib/index.js",
+  "source": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel src -d lib --extensions \".ts\""
+  },
+  "keywords": [
+    "use-three",
+    "three",
+    "threejs",
+    "react",
+    "canvas",
+    "hook"
+  ],
+  "author": {
+    "name": "Roman Marchenko",
+    "email": "romanus.march@gmail.com",
+    "url": "https://twitter.com/romanus_march"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-preset-minify": "^0.5.1",
+    "@babel/preset-typescript": "^7.7.4",
+    "typescript": "^3.7.2"
+  },
+  "dependencies": {
+    "@types/react": "^16.9.14",
+    "@types/react-dom": "^16.9.4",
+    "three": "^0.111.0"
+  },
+  "files": [
+    "LICENSE",
+    "dist/"
+  ],
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roman-march/use-calendar-hook.git"
+  },
+  "bugs": {
+    "url": "https://github.com/roman-march/use-calendar-hook/issues"
+  },
+  "homepage": "https://github.com/roman-march/use-calendar-hook#readme"
+}
