@@ -14,17 +14,17 @@ export interface Context {
 }
 
 export interface EventsArguments {
+  onStart?: (ctx: Context) => void;
+  onUpdate?: (ctx: Context, deltaTime: number) => void;
+  onDestroy?: (ctx: Context) => void;
   onLoad?: (ctx: Context) => void;
+  onLoadError?: (ctx: Context, url: string) => void;
   onLoadProgress?: (
     ctx: Context,
     item: any,
     loaded: number,
     total: number
   ) => void;
-  onLoadError?: (ctx: Context, url: string) => void;
-  onStart?: (ctx: Context) => void;
-  onUpdate?: (ctx: Context, deltaTime: number) => void;
-  onDestroy?: (ctx: Context) => void;
 }
 
 interface ContextArguments {
@@ -166,9 +166,9 @@ const useThree = (callbacks: EventsArguments, context: ContextArguments) => {
         }
       };
 
-      start();
-
       ref.current.appendChild(renderer.current.domElement);
+
+      start();
 
       return () => {
         stop();
