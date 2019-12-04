@@ -10,7 +10,7 @@ npm install use-three --save
 
 ## Demo
 
-[![Edit use-three](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/use-three)
+[![Edit use-three](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/use-three-duck-demo-u77us)
 
 ## Usage
 
@@ -33,14 +33,14 @@ return <Three />;
 
 ### Parameters
 
-| Field          |    Type    | Description                                                                                                                 |
-| -------------- | :--------: | --------------------------------------------------------------------------------------------------------------------------- |
-| onStart        | `function` | This function will be called before Update method time.                                                                     |
-| onUpdate       | `function` | This function will be called every frame.                                                                                   |
-| onDestroy      | `function` | This function will be called when component unmount.                                                                        |
+| Field          |    Type    | Description                                                 |
+| -------------- | :--------: | ----------------------------------------------------------- |
+| onStart        | `function` | This function will be called before Update method time.     |
+| onUpdate       | `function` | This function will be called every frame.                   |
+| onDestroy      | `function` | This function will be called when component unmount.        |
 | onLoad         | `function` | This function will be called when all loading is completed. |
-| onLoadProgress | `function` | This function will be called when an item is complete.                                                                      |
-| onLoadError    | `function` | This function will be called when any item errors.                                                                          |
+| onLoadProgress | `function` | This function will be called when an item is complete.      |
+| onLoadError    | `function` | This function will be called when any item errors.          |
 
 #### config
 
