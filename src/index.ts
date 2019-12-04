@@ -35,7 +35,10 @@ interface ContextArguments {
   manager?: THREE.LoadingManager;
 }
 
-const useThree = (callbacks: EventsArguments, context: ContextArguments) => {
+const useThree = (
+  callbacks: EventsArguments,
+  context: ContextArguments = {}
+) => {
   const ref = useRef<HTMLInputElement>();
   const storage = useRef<Context>({} as any);
   const store = useRef<Store>(context.store || {});
@@ -166,9 +169,9 @@ const useThree = (callbacks: EventsArguments, context: ContextArguments) => {
         }
       };
 
-      ref.current.appendChild(renderer.current.domElement);
-
       start();
+
+      ref.current.appendChild(renderer.current.domElement);
 
       return () => {
         stop();
