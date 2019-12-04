@@ -1,10 +1,6 @@
-# use-calendar-hook
+# use-three
 
-React Hook for ThreeJs
-
-<div align="left">
-	<img src="https://user-images.githubusercontent.com/52174128/64046842-a4eb3180-cb75-11e9-8d06-8541611f183f.gif" height="320" />
-</div>
+React Hook for Three.js
 
 ## Installation
 
@@ -37,35 +33,24 @@ return <Three />;
 
 ### Parameters
 
-| Field     |    Type    | Description                                |
-| --------- | :--------: | ------------------------------------------ |
-| date      |   `date`   | Current date                               |
-| day       |  `number`  | Current number of day                      |
-| month     |  `string`  | Current month                              |
-| year      |  `string`  | Current year                               |
-| days      | `[Object]` | Days of current month                      |
-| months    | `[Object]` | Months of current year                     |
-| weeks     |  `Array`   | ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"] |
-| nextDay   | `Function` | Change current day on next                 |
-| prevDay   | `Function` | Change current day on previous             |
-| nextMonth | `Function` | Change current month on next               |
-| prevMonth | `Function` | Change current month on previous           |
-| nextYear  | `Function` | Change current year on next                |
-| prevYear  | `Function` | Change current year on previous            |
-| setDate   | `Function` | Set new day                                |
-| setMonth  | `Function` | Set new month                              |
-| setYear   | `Function` | Set new year                               |
+| Field          |    Type    | Description                                                                                                                 |
+| -------------- | :--------: | --------------------------------------------------------------------------------------------------------------------------- |
+| onStart        | `function` | This function will be called before Update method time.                                                                     |
+| onUpdate       | `function` | This function will be called every frame.                                                                                   |
+| onDestroy      | `function` | This function will be called when component unmount.                                                                        |
+| onLoad         | `function` | This function will be called when all loading is completed. By default this is undefined, unless passed in the constructor. |
+| onLoadProgress | `function` | This function will be called when an item is complete.                                                                      |
+| onLoadError    | `function` | This function will be called when any item errors.                                                                          |
 
 #### config
 
-| Key           |   Type   | Description                                                                    |
-| ------------- | :------: | ------------------------------------------------------------------------------ |
-| startDate     |  `date`  | Start date                                                                     |
-| endDate       |  `date`  | End date                                                                       |
-| maxDate       |  `date`  | Option specifies the maximum/latest date (inclusively) allowed for selection   |
-| minDate       |  `date`  | Option specifies the minimum/earliest date (inclusively) allowed for selection |
-| disabledDays  | `[date]` | Inaccessible days of the week for selection                                    |
-| disabledDates | `[date]` | Inaccessible dates for selection                                               |
+| Key      |                          Type                           | Description                                                                                                                   |
+| -------- | :-----------------------------------------------------: | ----------------------------------------------------------------------------------------------------------------------------- |
+| store    |                        `object`                         | This is store for saving any variables.                                                                                       |
+| scene    |                      `THREE.Scene`                      | Scenes allow you to set up what and where is to be rendered by three.js. This is where you place objects, lights and cameras. |
+| renderer |                  `THREE.WebGLRenderer`                  | The WebGL renderer displays your beautifully crafted scenes using WebGL.                                                      |
+| camera   | `THREE.OrthographicCamera` or `THREE.PerspectiveCamera` | This is Three.js camera instance.                                                                                             |
+| manager  |                 `THREE.LoadingManager`                  | Handles and keeps track of loaded and pending data.                                                                           |
 
 ## License
 
