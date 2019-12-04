@@ -15,7 +15,7 @@ npm install use-three --save
 ## Usage
 
 ```javascript
-import useCalendar from "use-three";
+import useThree from "use-three";
 
 const Three = useThree({
   onLoad: ctx => {},
