@@ -45,10 +45,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/roman-march/use-calendar-hook.git"
+    "url": "git+https://github.com/roman-march/use-three.git"
   },
   "bugs": {
-    "url": "https://github.com/roman-march/use-calendar-hook/issues"
+    "url": "https://github.com/roman-march/use-three/issues"
   },
-  "homepage": "https://github.com/roman-march/use-calendar-hook#readme"
+  "homepage": "https://github.com/roman-march/use-three#readme"
 }
