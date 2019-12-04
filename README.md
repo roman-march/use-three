@@ -38,7 +38,7 @@ return <Three />;
 | onStart        | `function` | This function will be called before Update method time.                                                                     |
 | onUpdate       | `function` | This function will be called every frame.                                                                                   |
 | onDestroy      | `function` | This function will be called when component unmount.                                                                        |
-| onLoad         | `function` | This function will be called when all loading is completed. By default this is undefined, unless passed in the constructor. |
+| onLoad         | `function` | This function will be called when all loading is completed. |
 | onLoadProgress | `function` | This function will be called when an item is complete.                                                                      |
 | onLoadError    | `function` | This function will be called when any item errors.                                                                          |
 
