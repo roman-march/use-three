@@ -1,1 +1,28 @@
-"use strict";function _typeof(a){return _typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(a){return typeof a}:function(a){return a&&"function"==typeof Symbol&&a.constructor===Symbol&&a!==Symbol.prototype?"symbol":typeof a},_typeof(a)}Object.defineProperty(exports,"__esModule",{value:!0}),exports["default"]=void 0;var _react=_interopRequireWildcard(require("react")),THREE=_interopRequireWildcard(require("three"));function _getRequireWildcardCache(){if("function"!=typeof WeakMap)return null;var a=new WeakMap;return _getRequireWildcardCache=function(){return a},a}function _interopRequireWildcard(a){if(a&&a.__esModule)return a;if(null===a||"object"!==_typeof(a)&&"function"!=typeof a)return{default:a};var b=_getRequireWildcardCache();if(b&&b.has(a))return b.get(a);var c={},d=Object.defineProperty&&Object.getOwnPropertyDescriptor;for(var e in a)if(Object.prototype.hasOwnProperty.call(a,e)){var f=d?Object.getOwnPropertyDescriptor(a,e):null;f&&(f.get||f.set)?Object.defineProperty(c,e,f):c[e]=a[e]}return c["default"]=a,b&&b.set(a,c),c}function ownKeys(a,b){var c=Object.keys(a);if(Object.getOwnPropertySymbols){var d=Object.getOwnPropertySymbols(a);b&&(d=d.filter(function(b){return Object.getOwnPropertyDescriptor(a,b).enumerable})),c.push.apply(c,d)}return c}function _objectSpread(a){for(var b,c=1;c<arguments.length;c++)b=null==arguments[c]?{}:arguments[c],c%2?ownKeys(Object(b),!0).forEach(function(c){_defineProperty(a,c,b[c])}):Object.getOwnPropertyDescriptors?Object.defineProperties(a,Object.getOwnPropertyDescriptors(b)):ownKeys(Object(b)).forEach(function(c){Object.defineProperty(a,c,Object.getOwnPropertyDescriptor(b,c))});return a}function _defineProperty(a,b,c){return b in a?Object.defineProperty(a,b,{value:c,enumerable:!0,configurable:!0,writable:!0}):a[b]=c,a}var useThree=function(a){var b=1<arguments.length&&void 0!==arguments[1]?arguments[1]:{},c=(0,_react.useRef)(),d=(0,_react.useRef)({}),e=(0,_react.useRef)(b.store||{}),f=(0,_react.useRef)(function(a){return _react["default"].createElement("div",_objectSpread({},a,{ref:c}))}),g=(0,_react.useRef)(),h=(0,_react.useRef)(),i=(0,_react.useRef)(),j=(0,_react.useRef)(),k=(0,_react.useRef)(),l=(0,_react.useRef)(0),m=(0,_react.useRef)(0),n=(0,_react.useRef)(a),o=(0,_react.useCallback)(function(a){n.current.onUpdate&&n.current.onUpdate(d.current,a),j.current&&i.current&&h.current&&(i.current.updateProjectionMatrix(),j.current.render(h.current,i.current))},[n]),p=(0,_react.useCallback)(function(a){l.current=(a-m.current)/1e3,o(l.current),g.current=window.requestAnimationFrame(p),m.current=a},[o]),q=(0,_react.useCallback)(function(){n.current.onStart&&n.current.onStart(d.current),g.current||(g.current=requestAnimationFrame(p))},[p]),r=(0,_react.useCallback)(function(){n.current.onDestroy&&n.current.onDestroy(d.current),g.current&&cancelAnimationFrame(g.current)},[]),s=(0,_react.useCallback)(function(){if(c.current&&i.current&&j.current){var a=c.current.clientWidth,b=c.current.clientHeight;"PerspectiveCamera"===i.current.type&&(i.current.aspect=a/b),i.current.updateProjectionMatrix(),j.current.setSize(a,b)}},[]);return(0,_react.useEffect)(function(){n.current=a,window.addEventListener("resize",s,!1)},[a,s]),(0,_react.useEffect)(function(){if(c.current){var a=c.current.clientWidth,f=c.current.clientHeight;return h.current=b.scene||new THREE.Scene,j.current=b.renderer||new THREE.WebGLRenderer,i.current=b.camera||new THREE.PerspectiveCamera(75,a/f,.1,1e3),k.current=b.manager||new THREE.LoadingManager,d.current.camera=i.current,d.current.renderer=j.current,d.current.scene=h.current,d.current.manager=k.current,d.current.store=e.current||{},j.current.setSize(a,f),j.current.setPixelRatio(window.devicePixelRatio||1),k.current.onProgress=function(a,b,c){n.current.onLoadProgress&&n.current.onLoadProgress(d.current,a,b,c)},k.current.onError=function(a){n.current.onLoadError&&n.current.onLoadError(d.current,a)},k.current.onLoad=function(){n.current.onLoad&&n.current.onLoad(d.current)},q(),c.current.appendChild(j.current.domElement),function(){r()}}},[]),f.current},_default=useThree;exports["default"]=_default;
+import * as THREE from "three";
+export interface Store {
+    [key: string]: any;
+}
+export interface Context {
+    store: Store;
+    scene: THREE.Scene;
+    renderer: THREE.WebGLRenderer;
+    camera: THREE.PerspectiveCamera | THREE.OrthographicCamera;
+    manager: THREE.LoadingManager;
+}
+export interface EventsArguments {
+    onStart?: (ctx: Context) => void;
+    onUpdate?: (ctx: Context, deltaTime: number) => void;
+    onDestroy?: (ctx: Context) => void;
+    onLoad?: (ctx: Context) => void;
+    onLoadError?: (ctx: Context, url: string) => void;
+    onLoadProgress?: (ctx: Context, item: any, loaded: number, total: number) => void;
+}
+interface ContextArguments {
+    store?: Store;
+    scene?: THREE.Scene;
+    renderer?: THREE.WebGLRenderer;
+    camera?: THREE.PerspectiveCamera | THREE.OrthographicCamera;
+    manager?: THREE.LoadingManager;
+}
+declare const useThree: (callbacks: EventsArguments, context?: ContextArguments) => Function;
+export default useThree;
