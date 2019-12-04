@@ -6,7 +6,11 @@
     "declaration": true,
     "outDir": "lib",
     "esModuleInterop": true,
-    "strict": true
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "typeRoots": ["../node_modules/@types", "../@types"],
+    "jsx": "react"
   },
   "include": ["src"],
   "exclude": ["node_modules", "**/__tests__/*"]
