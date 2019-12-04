@@ -25,7 +25,7 @@ const Three = useThree({
   onLoadProgress: (ctx, item, loaded, total) => {},
   onLoadError: (ctx, url) => {}
 });
-
+ 
 return <Three />;
 ```
 
