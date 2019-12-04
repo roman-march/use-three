@@ -39,7 +39,7 @@
   },
   "files": [
     "LICENSE",
-    "dist/"
+    "lib/"
   ],
   "directories": {
     "lib": "lib"
