@@ -25,7 +25,7 @@ const Three = useThree({
   onUpdate: ctx => {},
   onDestroy: ctx => {}
 });
-
+ 
 return <Three />;
 ```
 
