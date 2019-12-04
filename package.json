@@ -7,7 +7,8 @@
   "source": "src/index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "yarn buildjs | yarn buildts",
+    "prepublish": "build",
+    "build": "yarn buildts & yarn buildjs",
     "buildjs": "babel src -o lib/index.js --extensions \".ts\"",
     "buildts": "babel src -o lib/index.d.ts --extensions \".ts\""
   },
