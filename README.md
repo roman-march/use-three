@@ -18,12 +18,12 @@ npm install use-three --save
 import useThree from "use-three";
 
 const Three = useThree({
-  onLoad: ctx => {},
-  onLoadProgress: (ctx, item, loaded, total) => {},
-  onLoadError: (ctx, url) => {},
   onStart: ctx => {},
   onUpdate: ctx => {},
-  onDestroy: ctx => {}
+  onDestroy: ctx => {},
+  onLoad: ctx => {},
+  onLoadProgress: (ctx, item, loaded, total) => {},
+  onLoadError: (ctx, url) => {}
 });
 
 return <Three />;
