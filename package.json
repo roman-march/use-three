@@ -1,12 +1,15 @@
 {
   "name": "use-three",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "React Hook for Three.js",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "source": "src/index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel src -d lib --extensions \".ts\""
+    "build": "yarn buildjs | yarn buildts",
+    "buildjs": "babel src -o lib/index.js --extensions \".ts\"",
+    "buildts": "babel src -o lib/index.d.ts --extensions \".ts\""
   },
   "keywords": [
     "use-three",
