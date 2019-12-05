@@ -37,7 +37,10 @@ interface ContextArguments {
   [type: string]: any;
 }
 
-const useThree = (events: EventsArguments, context: ContextArguments = {}) => {
+const useThree = (
+  events: EventsArguments = {},
+  context: ContextArguments = {}
+) => {
   const ref = useRef<HTMLInputElement>();
   const storage = useRef<Context>({} as any);
   const store = useRef<Store>(context.store || {});
