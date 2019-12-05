@@ -8,6 +8,7 @@ export interface Context {
     renderer: THREE.WebGLRenderer;
     camera: THREE.PerspectiveCamera | THREE.OrthographicCamera;
     manager: THREE.LoadingManager;
+    [type: string]: any;
 }
 export interface EventsArguments {
     onStart?: (ctx: Context) => void;
@@ -23,6 +24,7 @@ interface ContextArguments {
     renderer?: THREE.WebGLRenderer;
     camera?: THREE.PerspectiveCamera | THREE.OrthographicCamera;
     manager?: THREE.LoadingManager;
+    [type: string]: any;
 }
-declare const useThree: (callbacks: EventsArguments, context?: ContextArguments) => Function;
+declare const useThree: (events: EventsArguments, context?: ContextArguments) => Function;
 export default useThree;

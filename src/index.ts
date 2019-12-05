@@ -11,6 +11,7 @@ export interface Context {
   renderer: THREE.WebGLRenderer;
   camera: THREE.PerspectiveCamera | THREE.OrthographicCamera;
   manager: THREE.LoadingManager;
+  [type: string]: any;
 }
 
 export interface EventsArguments {
@@ -33,12 +34,10 @@ interface ContextArguments {
   renderer?: THREE.WebGLRenderer;
   camera?: THREE.PerspectiveCamera | THREE.OrthographicCamera;
   manager?: THREE.LoadingManager;
+  [type: string]: any;
 }
 
-const useThree = (
-  callbacks: EventsArguments,
-  context: ContextArguments = {}
-) => {
+const useThree = (events: EventsArguments, context: ContextArguments = {}) => {
   const ref = useRef<HTMLInputElement>();
   const storage = useRef<Context>({} as any);
   const store = useRef<Store>(context.store || {});
@@ -52,12 +51,12 @@ const useThree = (
   const manager = useRef<THREE.LoadingManager>();
   const deltaTime = useRef<number>(0);
   const lastTime = useRef<number>(0);
-  const savedCallbacks = useRef<EventsArguments>(callbacks);
+  const callbacks = useRef<EventsArguments>(events);
 
   const renderScene = useCallback(
     dt => {
-      if (savedCallbacks.current.onUpdate) {
-        savedCallbacks.current.onUpdate(storage.current, dt);
+      if (callbacks.current.onUpdate) {
+        callbacks.current.onUpdate(storage.current, dt);
       }
 
       if (renderer.current && camera.current && scene.current) {
@@ -65,7 +64,7 @@ const useThree = (
         renderer.current.render(scene.current, camera.current);
       }
     },
-    [savedCallbacks]
+    [callbacks]
   );
 
   const update = useCallback(
@@ -81,8 +80,8 @@ const useThree = (
   );
 
   const start = useCallback(() => {
-    if (savedCallbacks.current.onStart) {
-      savedCallbacks.current.onStart(storage.current);
+    if (callbacks.current.onStart) {
+      callbacks.current.onStart(storage.current);
     }
 
     if (!frameId.current) {
@@ -91,8 +90,8 @@ const useThree = (
   }, [update]);
 
   const stop = useCallback(() => {
-    if (savedCallbacks.current.onDestroy) {
-      savedCallbacks.current.onDestroy(storage.current);
+    if (callbacks.current.onDestroy) {
+      callbacks.current.onDestroy(storage.current);
     }
 
     if (frameId.current) {
@@ -116,12 +115,8 @@ const useThree = (
   }, []);
 
   useEffect(() => {
-    savedCallbacks.current = callbacks;
+    callbacks.current = events;
 
-    window.addEventListener("resize", resize, false);
-  }, [callbacks, resize]);
-
-  useEffect(() => {
     if (ref.current) {
       const width = ref.current.clientWidth;
       const height = ref.current.clientHeight;
@@ -133,6 +128,7 @@ const useThree = (
         context.camera || new THREE.PerspectiveCamera(75, aspect, 0.1, 1000);
       manager.current = context.manager || new THREE.LoadingManager();
 
+      storage.current = { ...storage.current, ...context };
       storage.current.camera = camera.current;
       storage.current.renderer = renderer.current;
       storage.current.scene = scene.current;
@@ -147,8 +143,8 @@ const useThree = (
         loaded: number,
         total: number
       ) => {
-        if (savedCallbacks.current.onLoadProgress) {
-          savedCallbacks.current.onLoadProgress(
+        if (callbacks.current.onLoadProgress) {
+          callbacks.current.onLoadProgress(
             storage.current,
             item,
             loaded,
@@ -158,14 +154,14 @@ const useThree = (
       };
 
       manager.current.onError = (url: string) => {
-        if (savedCallbacks.current.onLoadError) {
-          savedCallbacks.current.onLoadError(storage.current, url);
+        if (callbacks.current.onLoadError) {
+          callbacks.current.onLoadError(storage.current, url);
         }
       };
 
       manager.current.onLoad = () => {
-        if (savedCallbacks.current.onLoad) {
-          savedCallbacks.current.onLoad(storage.current);
+        if (callbacks.current.onLoad) {
+          callbacks.current.onLoad(storage.current);
         }
       };
 
@@ -177,6 +173,8 @@ const useThree = (
         stop();
       };
     }
+
+    window.addEventListener("resize", resize, false);
   }, []);
 
   return element.current;
