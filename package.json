@@ -1,6 +1,6 @@
 {
   "name": "use-three",
-  "version": "1.1.9",
+  "version": "1.0.1",
   "description": "React Hook for Three.js",
   "main": "./lib/index.js",
   "source": "./src/index.ts",
@@ -15,6 +15,7 @@
     "threejs",
     "react",
     "canvas",
+    "typescript",
     "hook"
   ],
   "author": {
@@ -28,13 +29,12 @@
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
-    "babel-preset-minify": "^0.5.1",
     "@babel/preset-typescript": "^7.7.4",
+    "babel-preset-minify": "^0.5.1",
     "typescript": "^3.7.2"
   },
   "dependencies": {
     "@types/react": "^16.9.14",
-    "@types/react-dom": "^16.9.4",
     "three": "^0.111.0"
   },
   "files": [
