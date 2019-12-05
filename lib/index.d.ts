@@ -26,5 +26,5 @@ interface ContextArguments {
     manager?: THREE.LoadingManager;
     [type: string]: any;
 }
-declare const useThree: (events: EventsArguments, context?: ContextArguments) => Function;
+declare const useThree: (events?: EventsArguments, context?: ContextArguments) => Function;
 export default useThree;

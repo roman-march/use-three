@@ -56,6 +56,69 @@ const useThree = (
   const lastTime = useRef<number>(0);
   const callbacks = useRef<EventsArguments>(events);
 
+  useEffect(() => {
+    callbacks.current = events;
+
+    if (ref.current) {
+      const width = ref.current.clientWidth;
+      const height = ref.current.clientHeight;
+      const aspect = width / height;
+
+      scene.current = context.scene || new THREE.Scene();
+      renderer.current = context.renderer || new THREE.WebGLRenderer();
+      camera.current =
+        context.camera || new THREE.PerspectiveCamera(75, aspect, 0.1, 1000);
+      manager.current = context.manager || new THREE.LoadingManager();
+
+      storage.current = { ...storage.current, ...context };
+      storage.current.camera = camera.current;
+      storage.current.renderer = renderer.current;
+      storage.current.scene = scene.current;
+      storage.current.manager = manager.current;
+      storage.current.store = store.current || {};
+
+      renderer.current.setSize(width, height);
+      renderer.current.setPixelRatio(window.devicePixelRatio || 1);
+
+      manager.current.onProgress = (
+        item: any,
+        loaded: number,
+        total: number
+      ) => {
+        if (callbacks.current.onLoadProgress) {
+          callbacks.current.onLoadProgress(
+            storage.current,
+            item,
+            loaded,
+            total
+          );
+        }
+      };
+
+      manager.current.onError = (url: string) => {
+        if (callbacks.current.onLoadError) {
+          callbacks.current.onLoadError(storage.current, url);
+        }
+      };
+
+      manager.current.onLoad = () => {
+        if (callbacks.current.onLoad) {
+          callbacks.current.onLoad(storage.current);
+        }
+      };
+
+      start();
+
+      ref.current.appendChild(renderer.current.domElement);
+
+      window.addEventListener("resize", resize, false);
+
+      return () => {
+        stop();
+      };
+    }
+  }, []);
+
   const renderScene = useCallback(
     dt => {
       if (callbacks.current.onUpdate) {
@@ -115,69 +178,6 @@ const useThree = (
       camera.current.updateProjectionMatrix();
       renderer.current.setSize(width, height);
     }
-  }, []);
-
-  useEffect(() => {
-    callbacks.current = events;
-
-    if (ref.current) {
-      const width = ref.current.clientWidth;
-      const height = ref.current.clientHeight;
-      const aspect = width / height;
-
-      scene.current = context.scene || new THREE.Scene();
-      renderer.current = context.renderer || new THREE.WebGLRenderer();
-      camera.current =
-        context.camera || new THREE.PerspectiveCamera(75, aspect, 0.1, 1000);
-      manager.current = context.manager || new THREE.LoadingManager();
-
-      storage.current = { ...storage.current, ...context };
-      storage.current.camera = camera.current;
-      storage.current.renderer = renderer.current;
-      storage.current.scene = scene.current;
-      storage.current.manager = manager.current;
-      storage.current.store = store.current || {};
-
-      renderer.current.setSize(width, height);
-      renderer.current.setPixelRatio(window.devicePixelRatio || 1);
-
-      manager.current.onProgress = (
-        item: any,
-        loaded: number,
-        total: number
-      ) => {
-        if (callbacks.current.onLoadProgress) {
-          callbacks.current.onLoadProgress(
-            storage.current,
-            item,
-            loaded,
-            total
-          );
-        }
-      };
-
-      manager.current.onError = (url: string) => {
-        if (callbacks.current.onLoadError) {
-          callbacks.current.onLoadError(storage.current, url);
-        }
-      };
-
-      manager.current.onLoad = () => {
-        if (callbacks.current.onLoad) {
-          callbacks.current.onLoad(storage.current);
-        }
-      };
-
-      start();
-
-      ref.current.appendChild(renderer.current.domElement);
-
-      return () => {
-        stop();
-      };
-    }
-
-    window.addEventListener("resize", resize, false);
   }, []);
 
   return element.current;
