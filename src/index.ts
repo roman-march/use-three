@@ -47,6 +47,7 @@ const useThree = (
   const element = useRef<Function>((props: object) =>
     React.createElement("div", { ...props, ref })
   );
+
   const frameId = useRef<number>();
   const scene = useRef<THREE.Scene>();
   const camera = useRef<THREE.PerspectiveCamera | THREE.OrthographicCamera>();
@@ -55,6 +56,20 @@ const useThree = (
   const deltaTime = useRef<number>(0);
   const lastTime = useRef<number>(0);
   const callbacks = useRef<EventsArguments>(events);
+
+  const createRenderer = () => {
+    if (context.webgl2) {
+      const canvas = document.createElement("canvas");
+      const canvasContext = canvas.getContext("webgl2");
+
+      return new THREE.WebGLRenderer({
+        canvas,
+        context: canvasContext || undefined
+      });
+    } else {
+      return new THREE.WebGLRenderer();
+    }
+  };
 
   useEffect(() => {
     callbacks.current = events;
@@ -119,27 +134,27 @@ const useThree = (
     }
   }, []);
 
-  const renderScene = useCallback(
-    dt => {
-      if (callbacks.current.onUpdate) {
-        callbacks.current.onUpdate(storage.current, dt);
-      }
-
-      if (renderer.current && camera.current && scene.current) {
-        camera.current.updateProjectionMatrix();
-        renderer.current.render(scene.current, camera.current);
-      }
-    },
-    [callbacks]
-  );
+  const renderScene = useCallback(() => {
+    if (renderer.current && camera.current && scene.current) {
+      camera.current.updateProjectionMatrix();
+      renderer.current.render(scene.current, camera.current);
+    }
+  }, [callbacks]);
 
   const update = useCallback(
     time => {
       deltaTime.current = (time - lastTime.current) / 1000;
 
-      renderScene(deltaTime.current);
-
       frameId.current = window.requestAnimationFrame(update);
+
+      if (callbacks.current.onUpdate) {
+        callbacks.current.onUpdate(storage.current, deltaTime.current);
+      }
+
+      if (!storage.current.manualRender) {
+        renderScene();
+      }
+
       lastTime.current = time;
     },
     [renderScene]

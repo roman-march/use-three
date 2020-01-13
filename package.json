@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "@types/react": "^16.9.14",
-    "three": "^0.111.0"
+    "three": "^0.112.1"
   },
   "files": [
     "LICENSE",
