@@ -23,9 +23,15 @@ const Three = useThree({
   onDestroy: ctx => {},
   onLoad: ctx => {},
   onLoadProgress: (ctx, item, loaded, total) => {},
-  onLoadError: (ctx, url) => {}
+  onMouseDown: (e, ctx) => {},
+  onMouseMove: (e, ctx) => {},
+  onMouseUp: (e, ctx) => {},
+  onTouchStart: (e, ctx) => {},
+  onTouchEnd: (e, ctx) => {},
+  onTouchCancel: (e, ctx) => {},
+  onTouchMove: (e, ctx) => {}
 });
- 
+
 return <Three />;
 ```
 
@@ -33,14 +39,21 @@ return <Three />;
 
 ### Parameters
 
-| Field          |    Type    | Description                                                 |
-| -------------- | :--------: | ----------------------------------------------------------- |
-| onStart        | `function` | This function will be called before Update method time.     |
-| onUpdate       | `function` | This function will be called every frame.                   |
-| onDestroy      | `function` | This function will be called when component unmount.        |
-| onLoad         | `function` | This function will be called when all loading is completed. |
-| onLoadProgress | `function` | This function will be called when an item is complete.      |
-| onLoadError    | `function` | This function will be called when any item errors.          |
+| Field          |    Type    | Description                                                               |
+| -------------- | :--------: | ------------------------------------------------------------------------- |
+| onStart        | `function` | This function will be called before Update method time.                   |
+| onUpdate       | `function` | This function will be called every frame.                                 |
+| onDestroy      | `function` | This function will be called when component unmount.                      |
+| onLoad         | `function` | This function will be called when all loading is completed.               |
+| onLoadProgress | `function` | This function will be called when an item is complete.                    |
+| onLoadError    | `function` | This function will be called when any item errors.                        |
+| onMouseDown    | `function` | This function will be called when the user presses a mouse button.        |
+| onMouseMove    | `function` | This function will be called when the pointer is moving                   |
+| onMouseUp      | `function` | This function will be called when a user releases a mouse button          |
+| onTouchStart   | `function` | This function will be called when a finger is placed on a touch screen    |
+| onTouchEnd     | `function` | This function will be called when a finger is removed from a touch screen |
+| onTouchCancel  | `function` | This function will be called when the touch is interrupted                |
+| onTouchMove    | `function` | This function will be called when a finger is dragged across the screen   |
 
 #### config
 
