@@ -17,6 +17,13 @@ export interface EventsArguments {
     onLoad?: (ctx: Context) => void;
     onLoadError?: (ctx: Context, url: string) => void;
     onLoadProgress?: (ctx: Context, item: any, loaded: number, total: number) => void;
+    onMouseDown?: (e: MouseEvent, ctx: Context) => void;
+    onMouseMove?: (e: MouseEvent, ctx: Context) => void;
+    onMouseUp?: (e: MouseEvent, ctx: Context) => void;
+    onTouchStart?: (e: TouchEvent, ctx: Context) => void;
+    onTouchEnd?: (e: TouchEvent, ctx: Context) => void;
+    onTouchCancel?: (e: TouchEvent, ctx: Context) => void;
+    onTouchMove?: (e: TouchEvent, ctx: Context) => void;
 }
 interface ContextArguments {
     store?: Store;
